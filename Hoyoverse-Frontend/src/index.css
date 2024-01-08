@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply grid min-h-screen m-0 text-base font-normal font-primary;
+        grid-template-rows: auto 1fr auto;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+    }
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+    body::-webkit-scrollbar-track {
+        background-color: #fafafa;
+    }
+    body::-webkit-scrollbar-thumb {
+        background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+        border-radius: 50px;
+    }
+    input {
+        @apply outline-none;
+    }
+}
+
+@layer components {
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.65);
+        color: white;
+    }
+
+    .container {
+        @apply w-full max-w-[1440px] mx-auto;
+    }
+}
