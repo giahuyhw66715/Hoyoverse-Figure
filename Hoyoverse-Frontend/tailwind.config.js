@@ -11,9 +11,9 @@ export default {
                 secondary: "#FE6B68",
                 skyBlue: "#4D6EFF",
                 dark: "#181818",
-            },
-            backgroundImage: {
-                banner: "",
+                grayDark: "#808191",
+                grey: "#4B5264",
+                black: "#171725",
             },
         },
     },

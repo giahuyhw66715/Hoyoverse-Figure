@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Button from "../../components/button/Button";
+import Heading from "../../components/common/Heading";
 
 const slides = [
     {
@@ -38,57 +39,23 @@ const HomeBanner = () => {
                 className="w-full h-full duration-500 bg-center bg-no-repeat bg-cover"
             >
                 <div className="flex flex-col justify-center px-16 overlay">
-                    <h1 className="text-6xl font-bold">
+                    {/* <h1 className="text-6xl font-bold">
                         {slides[currentIndex].title}
-                    </h1>
+                    </h1> */}
+                    <Heading className="mb-0 text-6xl text-left text-white">
+                        {slides[currentIndex].title}
+                    </Heading>
                     <p className="my-8 text-xl font-medium w-full max-w-[800px]">
                         {slides[currentIndex].description}
                     </p>
-                    <Button className="px-8 py-4 transition-all border !rounded-full border-secondary hover:text-secondary hover:bg-transparent hover:border-secondary w-fit bg-secondary text-xl">
+                    <Button
+                        className="px-8 py-4 text-xl rounded-full w-fit"
+                        color="secondary"
+                    >
                         Discover Now
                     </Button>
                 </div>
             </div>
-            {/* <div className="absolute top-0 z-10 items-center justify-between hidden w-full h-full px-10 transition-all group-hover:flex">
-                <button
-                    className="flex items-center justify-center p-3 bg-white rounded-full shadow-sm"
-                    onClick={prevSlide}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15.75 19.5L8.25 12l7.5-7.5"
-                        />
-                    </svg>
-                </button>
-                <button
-                    className="flex items-center justify-center p-3 bg-white rounded-full shadow-sm"
-                    onClick={nextSlide}
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                        />
-                    </svg>
-                </button>
-            </div> */}
             <div
                 className={`absolute bottom-0 z-10 flex justify-center w-full py-4 gap-x-1`}
             >

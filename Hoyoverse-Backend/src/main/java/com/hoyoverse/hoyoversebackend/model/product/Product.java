@@ -31,8 +31,8 @@ public class Product {
     @Column(name = "available_quantity", nullable = false)
     private int availableQuantity;
     @ManyToOne
-    @JoinColumn(name = "series_id", referencedColumnName = "id", nullable = false)
-    private Series series;
+    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
+    private Brand brand;
     @ManyToOne
     @JoinColumn(name = "sizing_id", referencedColumnName = "id", nullable = false)
     private Sizing sizing;

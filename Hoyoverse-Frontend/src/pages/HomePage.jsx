@@ -18,15 +18,6 @@ const HomePage = () => {
             <CardList></CardList>
             <Heading>Genshin Impact</Heading>
             <CardList></CardList>
-            <h1>HEllo World</h1>
-            <Dropdown>
-                <DropdownSelect type="button" title="Category"></DropdownSelect>
-                <DropdownList>
-                    <DropdownOption>Option 1</DropdownOption>
-                    <DropdownOption>Option 2</DropdownOption>
-                    <DropdownOption>Option 3</DropdownOption>
-                </DropdownList>
-            </Dropdown>
         </div>
     );
 };

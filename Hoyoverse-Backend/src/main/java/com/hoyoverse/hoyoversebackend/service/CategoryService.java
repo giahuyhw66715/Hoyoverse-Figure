@@ -18,7 +18,7 @@ public class CategoryService {
     }
 
     public Response<Category> saveCategory(Category category) {
-        return new Response<>(Response.SUCCESS, "Save product successfully", categoryRepository.save(category));
+        return new Response<>(Response.SUCCESS, "Save category successfully", categoryRepository.save(category));
     }
 
     public Response<Category> getCategoryById(Integer id) {

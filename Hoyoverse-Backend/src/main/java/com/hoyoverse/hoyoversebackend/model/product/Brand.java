@@ -8,13 +8,13 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "Series")
-public class Series {
+@Table(name = "Brand")
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private String name;
-    @OneToMany(mappedBy = "series")
+    @OneToMany(mappedBy = "brand")
     private Set<Product> products = new HashSet<>();
 }

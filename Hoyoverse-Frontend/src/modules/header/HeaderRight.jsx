@@ -1,10 +1,47 @@
 import HeaderNavItem from "./HeaderNavItem";
-import HeaderSearch from "./HeaderSearch";
+import Input from "../../components/input/Input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+    name: yup.string(),
+});
 
 const HeaderRight = () => {
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
+
     return (
         <ul className="flex items-center gap-x-5 ms-auto">
-            <HeaderSearch></HeaderSearch>
+            <Input
+                className="pr-16"
+                control={control}
+                errors={errors}
+                placeholder="Search"
+                name="search"
+                icon={
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                        />
+                    </svg>
+                }
+            ></Input>
             <li>
                 <HeaderNavItem to="/cart">
                     <svg

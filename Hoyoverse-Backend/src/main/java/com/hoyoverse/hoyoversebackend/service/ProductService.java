@@ -4,7 +4,6 @@ import com.hoyoverse.hoyoversebackend.model.product.Product;
 import com.hoyoverse.hoyoversebackend.model.response.Response;
 import com.hoyoverse.hoyoversebackend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public class ProductService {
         if (existingProduct != null) {
             existingProduct.setTitle(product.getTitle());
             existingProduct.setCharacterName(product.getCharacterName());
-            existingProduct.setSeries(product.getSeries());
+            existingProduct.setBrand(product.getBrand());
             existingProduct.setRetailPrice(product.getRetailPrice());
             existingProduct.setDiscountPrice(product.getDiscountPrice());
             existingProduct.setSizing(product.getSizing());

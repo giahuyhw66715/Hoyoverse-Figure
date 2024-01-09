@@ -14,10 +14,13 @@ const HeaderNavList = () => {
                 <HeaderNavItem to="/figures">Figures</HeaderNavItem>
             </li>
             <li>
-                {/* <HeaderNavItem to="/categories">Category</HeaderNavItem> */}
                 <HeaderNavItem>
                     <Dropdown>
-                        <DropdownSelect title="Category"></DropdownSelect>
+                        <DropdownSelect
+                            icon={false}
+                            title="Category"
+                            className="hover:text-primary"
+                        ></DropdownSelect>
                         <DropdownList>
                             <DropdownOption>Option 1</DropdownOption>
                             <DropdownOption>Option 2</DropdownOption>
@@ -27,7 +30,15 @@ const HeaderNavList = () => {
                 </HeaderNavItem>
             </li>
             <li>
-                <HeaderNavItem to="/management">Management</HeaderNavItem>
+                <HeaderNavItem to="/news">News</HeaderNavItem>
+            </li>
+            <li>
+                <HeaderNavItem to="/about">About</HeaderNavItem>
+            </li>
+            <li>
+                <HeaderNavItem to="/management/figures">
+                    Management
+                </HeaderNavItem>
             </li>
         </ul>
     );

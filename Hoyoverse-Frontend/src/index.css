@@ -5,8 +5,7 @@
 
 @layer base {
     body {
-        @apply grid min-h-screen m-0 text-base font-normal font-primary;
-        grid-template-rows: auto 1fr auto;
+        @apply text-base font-normal font-primary;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
@@ -23,6 +22,9 @@
     input {
         @apply outline-none;
     }
+    #root {
+        height: 100%;
+    }
 }
 
 @layer components {
@@ -35,5 +37,9 @@
 
     .container {
         @apply w-full max-w-[1440px] mx-auto;
+    }
+
+    .header-spacing {
+        @apply mt-48;
     }
 }

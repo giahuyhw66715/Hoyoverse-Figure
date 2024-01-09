@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import { twMerge } from "tailwind-merge";
 
 const Heading = ({ children, className = "" }) => {
     return (
         <h2
-            className={`text-4xl text-center text-secondary mt-20 mb-9 font-bold ${className}`}
+            className={twMerge(
+                `text-4xl text-center text-secondary mt-20 mb-9 font-bold ${className}`
+            )}
         >
             {children}
         </h2>

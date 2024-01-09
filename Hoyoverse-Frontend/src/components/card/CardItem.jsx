@@ -41,9 +41,7 @@ const CardItem = () => {
                 <strong className="text-xl text-right text-secondary">
                     2.850.000
                 </strong>
-                <Button className="transition-all border border-white hover:bg-transparent hover:border-violet-500 hover:text-violet-500 bg-violet-500">
-                    Add to cart
-                </Button>
+                <Button color="violet">Add to cart</Button>
             </div>
         </div>
     );
