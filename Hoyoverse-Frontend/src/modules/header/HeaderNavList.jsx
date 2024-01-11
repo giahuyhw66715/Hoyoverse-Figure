@@ -15,7 +15,8 @@ const HeaderNavList = () => {
             </li>
             <li>
                 <HeaderNavItem>
-                    <Dropdown>
+                    Category
+                    {/* <Dropdown>
                         <DropdownSelect
                             icon={false}
                             title="Category"
@@ -26,7 +27,7 @@ const HeaderNavList = () => {
                             <DropdownOption>Option 2</DropdownOption>
                             <DropdownOption>Option 3</DropdownOption>
                         </DropdownList>
-                    </Dropdown>
+                    </Dropdown> */}
                 </HeaderNavItem>
             </li>
             <li>

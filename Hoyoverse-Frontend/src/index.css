@@ -39,7 +39,7 @@
         @apply w-full max-w-[1440px] mx-auto;
     }
 
-    .header-spacing {
-        @apply mt-48;
+    .display-content {
+        @apply pt-48 pb-24;
     }
 }

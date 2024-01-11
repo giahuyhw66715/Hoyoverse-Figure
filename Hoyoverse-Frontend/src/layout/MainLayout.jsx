@@ -4,9 +4,11 @@ import Footer from "./Footer";
 
 const MainLayout = () => {
     return (
-        <div className="relative">
+        <div className="relative grid grid-rows-[1fr_auto] min-h-screen">
             <Header></Header>
-            <Outlet></Outlet>
+            <div className="display-content">
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );

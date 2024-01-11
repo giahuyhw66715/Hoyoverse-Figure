@@ -35,22 +35,40 @@ const sidebarLinks = [
         url: "/management/series",
         icon: (
             <svg
-                xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
                 stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
                 className="w-6 h-6"
             >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z"
-                />
+                <path d="M7 21h10" />
+                <path d="M4 3 H20 A2 2 0 0 1 22 5 V15 A2 2 0 0 1 20 17 H4 A2 2 0 0 1 2 15 V5 A2 2 0 0 1 4 3 z" />
             </svg>
         ),
     },
-
+    {
+        title: "Image",
+        url: "/management/image",
+        icon: (
+            <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+                className="w-6 h-6"
+            >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M15 8h.01" />
+                <path d="M7 4 H17 A3 3 0 0 1 20 7 V17 A3 3 0 0 1 17 20 H7 A3 3 0 0 1 4 17 V7 A3 3 0 0 1 7 4 z" />
+                <path d="M4 15l4-4a3 5 0 013 0l5 5" />
+                <path d="M14 14l1-1a3 5 0 013 0l2 2" />
+            </svg>
+        ),
+    },
     {
         title: "User",
         url: "/management/user",

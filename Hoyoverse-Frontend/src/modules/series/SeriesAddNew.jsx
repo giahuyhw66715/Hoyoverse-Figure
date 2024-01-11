@@ -9,6 +9,7 @@ import Field from "../../components/field/Field";
 import Label from "../../components/label/Label";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import { toast } from "react-toastify";
 
 const schema = yup.object().shape({
     name: yup.string().required("Series name is required"),
@@ -27,14 +28,13 @@ const SeriesAddNew = () => {
         },
     });
 
-    const handleAddNewCategory = async (values) => {
+    const handleAddNewSeries = async (values) => {
         try {
-            console.log("🚀 ~ values:", values);
-            const response = await axios.post(API.addSeries, values);
-            console.log(response.data);
+            await axios.post(API.addSeries, values);
+            toast.success("Add new series successfully");
             reset({});
         } catch (error) {
-            console.log(error);
+            toast.error("Something went wrong");
         }
     };
     return (
@@ -45,11 +45,11 @@ const SeriesAddNew = () => {
             <p className="text-sm text-grayDark">Add new series</p>
             <form
                 autoComplete="off"
-                onSubmit={handleSubmit(handleAddNewCategory)}
+                onSubmit={handleSubmit(handleAddNewSeries)}
             >
                 <FormLayout>
                     <Field>
-                        <Label>Series</Label>
+                        <Label htmlFor="name">Series</Label>
                         <Input
                             control={control}
                             errors={errors}

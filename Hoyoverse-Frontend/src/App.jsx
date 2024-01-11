@@ -11,6 +11,8 @@ import FigurePage from "./pages/FigurePage";
 import FigureAddNew from "./modules/figure/FigureAddNew";
 import CategoryAddNew from "./modules/category/CategoryAddNew";
 import SeriesAddNew from "./modules/series/SeriesAddNew";
+import ImagaManagement from "./modules/image/ImagaManagement";
+import ImageAddNew from "./modules/image/ImageAddNew";
 
 const App = () => {
     return (
@@ -46,6 +48,14 @@ const App = () => {
                         <Route
                             path="/management/add-series"
                             element={<SeriesAddNew></SeriesAddNew>}
+                        ></Route>
+                        <Route
+                            path="/management/image"
+                            element={<ImagaManagement></ImagaManagement>}
+                        ></Route>
+                        <Route
+                            path="/management/add-image"
+                            element={<ImageAddNew></ImageAddNew>}
                         ></Route>
                         <Route
                             path="/management/user"

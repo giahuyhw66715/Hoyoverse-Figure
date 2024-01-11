@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <div className="flex flex-col items-center justify-center gap-5 p-10 mt-20 text-white bg-dark">
+        <div className="flex flex-col items-center justify-center gap-5 p-10 text-white bg-dark">
             <div className="flex items-center gap-x-3">
                 <NavLink className="text-sm capitalize transition-all hover:underline">
                     Home

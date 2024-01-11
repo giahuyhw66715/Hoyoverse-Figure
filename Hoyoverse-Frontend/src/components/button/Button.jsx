@@ -8,6 +8,7 @@ const Button = ({
     className = "",
     type = "button",
     color = "primary",
+    onClick = () => {},
 }) => {
     const buttonClassName = twMerge(
         `font-semibold p-5 border text-white rounded-xl capitalize hover:bg-transparent ${
@@ -27,7 +28,7 @@ const Button = ({
         );
     }
     return (
-        <button type={type} className={buttonClassName}>
+        <button type={type} className={buttonClassName} onClick={onClick}>
             {children}
         </button>
     );
@@ -37,6 +38,7 @@ Button.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     color: PropTypes.oneOf(["primary", "secondary", "violet"]),
+    onClick: PropTypes.func,
     type: PropTypes.string,
     url: PropTypes.string,
 };

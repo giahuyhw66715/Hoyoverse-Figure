@@ -1,5 +1,6 @@
 package com.hoyoverse.hoyoversebackend.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class Category {
     private Integer id;
     @Column(nullable = false)
     private String name;
-    @OneToMany(mappedBy = "category")
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private Set<Figure> figures = new HashSet<>();
 }

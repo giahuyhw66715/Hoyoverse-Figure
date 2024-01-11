@@ -38,7 +38,7 @@ public class CategoryService {
         Category existingCategory = categoryRepository.findById(id).orElse(null);
         if (existingCategory != null) {
             existingCategory.setName(category.getName());
-            existingCategory.setProducts(category.getProducts());
+            existingCategory.setFigures(category.getFigures());
             return new Response<>(Response.SUCCESS, "Update category successfully", categoryRepository.save(existingCategory));
         }
         return new Response<>(Response.NOT_FOUND, "Category not found");

@@ -8,7 +8,7 @@ import DropdownSelect from "../components/dropdown/DropdownSelect";
 
 const FigurePage = () => {
     return (
-        <div className="container header-spacing">
+        <div className="container">
             <div className="flex items-center justify-between mb-9">
                 <Heading className="m-0 text-left text-black">
                     All Figures
@@ -30,14 +30,14 @@ const FigurePage = () => {
                             />
                         </svg>
                     </span>
-                    <Dropdown>
+                    {/* <Dropdown>
                         <DropdownSelect title="Sort By" dark></DropdownSelect>
                         <DropdownList>
                             <DropdownOption>Newest</DropdownOption>
                             <DropdownOption>Price: Low-High</DropdownOption>
                             <DropdownOption>Price: Low-High</DropdownOption>
                         </DropdownList>
-                    </Dropdown>
+                    </Dropdown> */}
                 </div>
             </div>
             <CardList>
