@@ -13,7 +13,7 @@ public class Image {
     private Integer id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "figure_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
     private Figure figure;
     @Column(nullable = false)
     private String url;

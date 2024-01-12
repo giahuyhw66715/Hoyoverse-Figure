@@ -21,10 +21,22 @@ const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
     characterName: yup.string().required("Character name is required"),
     releaseDate: yup.string().required("Release date is required"),
-    price: yup.number().required("Number is required"),
-    height: yup.string().required("Height is required"),
-    totalQuantity: yup.number().required("Total quantity is required"),
-    availableQuantity: yup.number().required("Available quantity is required"),
+    price: yup
+        .number()
+        .typeError("Price must be a number")
+        .required("Number is required"),
+    height: yup
+        .string()
+        .typeError("Height must be a number")
+        .required("Height is required"),
+    totalQuantity: yup
+        .number()
+        .typeError("Total quantity must be a number")
+        .required("Total quantity is required"),
+    availableQuantity: yup
+        .number()
+        .typeError("Available quantity must be a number")
+        .required("Available quantity is required"),
     category: yup.object().required("Please select category"),
     series: yup.object().required("Please select series"),
 });
@@ -47,7 +59,7 @@ const FigureAddNew = () => {
             releaseDate: "",
             price: 0,
             discount: 0,
-            height: "",
+            height: 0,
             totalQuantity: 0,
             availableQuantity: 0,
         },
@@ -132,6 +144,7 @@ const FigureAddNew = () => {
                             errors={errors}
                             placeholder="Height"
                             name="height"
+                            type="number"
                         ></Input>
                     </Field>
                     <Field>
@@ -176,7 +189,7 @@ const FigureAddNew = () => {
                                             option={category}
                                             setValue={setValue}
                                         >
-                                            {category?.name}
+                                            {`${category?.id} - ${category?.name}`}
                                         </DropdownOption>
                                     ))}
                             </DropdownList>
@@ -202,7 +215,7 @@ const FigureAddNew = () => {
                                             option={seriesItem}
                                             setValue={setValue}
                                         >
-                                            {seriesItem?.name}
+                                            {`${seriesItem?.id} - ${seriesItem?.name}`}
                                         </DropdownOption>
                                     ))}
                             </DropdownList>

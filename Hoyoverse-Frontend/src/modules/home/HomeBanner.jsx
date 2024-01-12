@@ -31,7 +31,7 @@ const HomeBanner = () => {
     // }, [currentIndex]);
 
     return (
-        <div className="w-full h-[1000px] relative group">
+        <div className="w-full h-[1000px] relative group -mt-48">
             <div
                 style={{
                     backgroundImage: `url(${slides[currentIndex].image})`,

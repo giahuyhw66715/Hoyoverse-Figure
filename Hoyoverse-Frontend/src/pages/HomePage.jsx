@@ -2,22 +2,28 @@ import { useEffect } from "react";
 import CardList from "../components/card/CardList";
 import Heading from "../components/common/Heading";
 import HomeBanner from "../modules/home/HomeBanner";
-import Dropdown from "../components/dropdown/Dropdown";
-import DropdownSelect from "../components/dropdown/DropdownSelect";
-import DropdownList from "../components/dropdown/DropdownList";
-import DropdownOption from "../components/dropdown/DropdownOption";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSeries } from "../store/series/seriesSlice";
+import { getAllFigures } from "../store/figure/figureSlice";
 
 const HomePage = () => {
+    const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(getAllSeries());
+        dispatch(getAllFigures());
         document.title = "Home | Hoyoverse";
-    }, []);
+    }, [dispatch]);
+    const { series } = useSelector((state) => state.series);
     return (
         <div>
             <HomeBanner></HomeBanner>
-            <Heading>Honkai Star Rail</Heading>
-            <CardList></CardList>
-            <Heading>Genshin Impact</Heading>
-            <CardList></CardList>
+            {series?.length > 0 &&
+                series.map((seriesItem) => (
+                    <div key={seriesItem?.id}>
+                        <Heading>{seriesItem?.name}</Heading>
+                        <CardList></CardList>
+                    </div>
+                ))}
         </div>
     );
 };

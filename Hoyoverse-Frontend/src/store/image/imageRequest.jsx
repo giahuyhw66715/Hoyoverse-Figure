@@ -13,6 +13,7 @@ const requestUploadImageToCloud = (bodyFormData) => {
 };
 
 const requestUploadFigureImage = (data) => {
+    console.log("🚀 ~ data:", data);
     return axios.post(API.addImages, data);
 };
 
