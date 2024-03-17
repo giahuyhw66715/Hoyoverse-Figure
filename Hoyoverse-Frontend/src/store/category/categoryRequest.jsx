@@ -1,6 +1,14 @@
 import axios from "axios";
 import { API } from "../../config/API";
 
-export const requestAllCategories = () => {
-    return axios.get(API.getAllCategories);
+const requestAddCategory = (data) => {
+    return axios.post(API.category, data);
 };
+
+const requestAllCategories = (data) => {
+    return axios.get(API.category, {
+        params: data,
+    });
+};
+
+export { requestAddCategory, requestAllCategories };

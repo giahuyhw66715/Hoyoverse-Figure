@@ -2,11 +2,17 @@ import axios from "axios";
 import { API } from "../../config/API";
 
 const requestAddFigure = (data) => {
-    return axios.post(API.addFigure, data);
+    return axios.post(API.figure, data);
 };
 
-const requestGetAllFigures = () => {
-    return axios.get(API.getAllFigures);
+const requestGetAllFigures = (data) => {
+    return axios.get(API.figure, {
+        params: data,
+    });
 };
 
-export { requestAddFigure, requestGetAllFigures };
+const requestUploadImageToCloud = (data) => {
+    return axios.post(API.imgbb, data);
+};
+
+export { requestAddFigure, requestGetAllFigures, requestUploadImageToCloud };

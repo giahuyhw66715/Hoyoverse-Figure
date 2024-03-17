@@ -10,6 +10,7 @@ const store = configureStore({
     reducer,
     middleware: (gDM) =>
         gDM({ serializableCheck: false }).concat(logger, sagaMiddleware),
+    // gDM({ serializableCheck: false }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

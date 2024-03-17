@@ -12,7 +12,9 @@ const SeriesManagement = () => {
                     </Heading>
                     <p className="text-sm text-grayDark">Manage your series</p>
                 </div>
-                <Button url="/management/add-series">Add New Series</Button>
+                <Button url="/management/series/add-series">
+                    Add New Series
+                </Button>
             </div>
         </Fragment>
     );

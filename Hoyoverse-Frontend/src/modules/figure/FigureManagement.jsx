@@ -12,7 +12,9 @@ const FigureManagement = () => {
                     </Heading>
                     <p className="text-sm text-grayDark">Manage your figures</p>
                 </div>
-                <Button url="/management/add-figure">Add New Figure</Button>
+                <Button url="/management/figures/add-figure">
+                    Add New Figure
+                </Button>
             </div>
         </Fragment>
     );

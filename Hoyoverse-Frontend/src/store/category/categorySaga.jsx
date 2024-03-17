@@ -1,9 +1,10 @@
 import { takeLatest } from "redux-saga/effects";
-import { getAllCategories } from "./categorySlice";
-import { handleGetAllCategories } from "./categoryHandlers";
+import { addCategory, getAllCategories } from "./categorySlice";
+import { handleAddCategory, handleGetAllCategories } from "./categoryHandlers";
 
 function* categorySaga() {
     yield takeLatest(getAllCategories.type, handleGetAllCategories);
+    yield takeLatest(addCategory.type, handleAddCategory);
 }
 
 export default categorySaga;

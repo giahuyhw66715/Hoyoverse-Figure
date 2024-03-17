@@ -4,16 +4,20 @@ import { NavLink } from "react-router-dom";
 import { DropdownContext } from "../../context/DropdownContext";
 
 const DropdownOption = ({
-    url = "#",
+    url = "",
     name,
     option,
     setValue,
     children,
+    onClick = () => {},
     ...props
 }) => {
     const { handleCloseDropdown } = useContext(DropdownContext);
     const handleSelectOptionValue = () => {
-        setValue(name, option);
+        if (!url) {
+            setValue(name, option);
+        }
+        onClick && onClick();
         handleCloseDropdown();
     };
 
@@ -33,9 +37,7 @@ DropdownOption.propTypes = {
     children: PropTypes.node,
     name: PropTypes.any,
     onClick: PropTypes.func,
-    option: PropTypes.shape({
-        name: PropTypes.string,
-    }),
+    option: PropTypes.any,
     setValue: PropTypes.func,
     url: PropTypes.string,
 };

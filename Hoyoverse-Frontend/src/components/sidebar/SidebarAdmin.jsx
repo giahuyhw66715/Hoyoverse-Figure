@@ -11,6 +11,15 @@ const sidebarLinks = [
         ),
     },
     {
+        title: "Brand",
+        url: "/management/brand",
+        icon: (
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                <path d="M5 22h14c1.103 0 2-.897 2-2V9a1 1 0 00-1-1h-3V7c0-2.757-2.243-5-5-5S7 4.243 7 7v1H4a1 1 0 00-1 1v11c0 1.103.897 2 2 2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-4 3h2v2h2v-2h6v2h2v-2h2l.002 10H5V10z" />
+            </svg>
+        ),
+    },
+    {
         title: "Category",
         url: "/management/category",
         icon: (
@@ -45,27 +54,6 @@ const sidebarLinks = [
             >
                 <path d="M7 21h10" />
                 <path d="M4 3 H20 A2 2 0 0 1 22 5 V15 A2 2 0 0 1 20 17 H4 A2 2 0 0 1 2 15 V5 A2 2 0 0 1 4 3 z" />
-            </svg>
-        ),
-    },
-    {
-        title: "Image",
-        url: "/management/image",
-        icon: (
-            <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-                className="w-6 h-6"
-            >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M15 8h.01" />
-                <path d="M7 4 H17 A3 3 0 0 1 20 7 V17 A3 3 0 0 1 17 20 H7 A3 3 0 0 1 4 17 V7 A3 3 0 0 1 7 4 z" />
-                <path d="M4 15l4-4a3 5 0 013 0l5 5" />
-                <path d="M14 14l1-1a3 5 0 013 0l2 2" />
             </svg>
         ),
     },

@@ -25,7 +25,6 @@ public class Figure {
     @Column(name = "character_name", nullable = false)
     private String characterName;
     @Column(name = "release_date", nullable = false, updatable = false)
-    @CreationTimestamp
     private Date releaseDate;
     @Column(name = "total_quantity", nullable = false)
     private int totalQuantity;
@@ -41,6 +40,12 @@ public class Figure {
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Category category;
-    @OneToMany(mappedBy = "figure", cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Brand brand;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "figure_id")
+    @OrderBy("id")
     private Set<Image> images = new HashSet<>();
 }

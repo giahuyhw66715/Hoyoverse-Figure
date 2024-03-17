@@ -1,4 +1,3 @@
-import { getAllCategories } from "../../store/category/categorySlice";
 import { getAllSeries } from "../../store/series/seriesSlice";
 import { addFigure } from "../../store/figure/figureSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +15,9 @@ import FormLayout from "../../layout/FormLayout";
 import Heading from "../../components/common/Heading";
 import Input from "../../components/input/Input";
 import Label from "../../components/label/Label";
+import { getAllCategories } from "../../store/category/categorySlice";
+import { getAllBrands } from "../../store/brand/brandSlice";
+import ImageUploader from "../../components/input/ImageUploader";
 
 const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
@@ -39,6 +41,7 @@ const schema = yup.object().shape({
         .required("Available quantity is required"),
     category: yup.object().required("Please select category"),
     series: yup.object().required("Please select series"),
+    brand: yup.object().required("Please select brand"),
 });
 
 const FigureAddNew = () => {
@@ -74,10 +77,12 @@ const FigureAddNew = () => {
     useEffect(() => {
         dispatch(getAllCategories());
         dispatch(getAllSeries());
+        dispatch(getAllBrands());
     }, [dispatch]);
 
     const { categories } = useSelector((state) => state.category);
     const { series } = useSelector((state) => state.series);
+    const { brands } = useSelector((state) => state.brand);
 
     return (
         <div>
@@ -220,6 +225,40 @@ const FigureAddNew = () => {
                                     ))}
                             </DropdownList>
                         </Dropdown>
+                    </Field>
+                    <Field>
+                        <Label htmlFor="brand">Brand</Label>
+                        <Dropdown errors={errors} name="brand">
+                            <DropdownSelect
+                                dark
+                                name="brand"
+                                defaultValue="Select brand"
+                                className="justify-between"
+                                watch={watch}
+                                border
+                            ></DropdownSelect>
+                            <DropdownList>
+                                {brands?.length > 0 &&
+                                    brands.map((brand) => (
+                                        <DropdownOption
+                                            key={brand.id}
+                                            name="brand"
+                                            option={brand}
+                                            setValue={setValue}
+                                        >
+                                            {`${brand?.id} - ${brand?.name}`}
+                                        </DropdownOption>
+                                    ))}
+                            </DropdownList>
+                        </Dropdown>
+                    </Field>
+                    <Field>
+                        <Label htmlFor="images">Images</Label>
+                        <ImageUploader
+                            multiple
+                            setValue={setValue}
+                            name="images"
+                        ></ImageUploader>
                     </Field>
                 </FormLayout>
                 <div className="mt-5 text-center">

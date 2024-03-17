@@ -32,9 +32,7 @@ const DropdownSelect = ({
             )}
             onClick={handleToggleShowDropdown}
         >
-            {/* <span>{title}</span> */}
             <span>{getDropdownLabel(name, defaultValue)}</span>
-            {/* <span>Select</span> */}
             {icon && (
                 <svg
                     className="w-5 h-5 ml-2 -mr-1"

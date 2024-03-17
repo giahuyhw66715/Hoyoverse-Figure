@@ -43,3 +43,11 @@
         @apply pt-48 pb-24;
     }
 }
+
+.dropdown-list {
+    scrollbar-width: none;
+}
+
+.dropdown-list::-webkit-scrollbar {
+    display: none;
+}

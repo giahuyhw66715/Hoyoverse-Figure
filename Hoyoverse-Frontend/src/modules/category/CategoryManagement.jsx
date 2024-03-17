@@ -14,7 +14,9 @@ const CategoryManagement = () => {
                         Manage your categories
                     </p>
                 </div>
-                <Button url="/management/add-category">Add New Category</Button>
+                <Button url="/management/category/add-category">
+                    Add New Category
+                </Button>
             </div>
         </Fragment>
     );

@@ -1,8 +1,14 @@
 import axios from "axios";
 import { API } from "../../config/API";
 
-const requestAllSeries = () => {
-    return axios.get(API.getAllSeries);
+const requestAddSeries = (data) => {
+    return axios.post(API.series, data);
 };
 
-export { requestAllSeries };
+const requestAllSeries = (data) => {
+    return axios.get(API.series, {
+        params: data,
+    });
+};
+
+export { requestAddSeries, requestAllSeries };

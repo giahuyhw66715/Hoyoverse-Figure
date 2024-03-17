@@ -4,16 +4,23 @@ import Heading from "../components/common/Heading";
 import HomeBanner from "../modules/home/HomeBanner";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSeries } from "../store/series/seriesSlice";
-import { getAllFigures } from "../store/figure/figureSlice";
+import { getAllFigures, resetFigures } from "../store/figure/figureSlice";
 
 const HomePage = () => {
     const dispatch = useDispatch();
+    const { series } = useSelector((state) => state.series);
+    const { figures } = useSelector((state) => state.figure);
+
     useEffect(() => {
+        document.title = "Home | Hoyoverse";
         dispatch(getAllSeries());
         dispatch(getAllFigures());
-        document.title = "Home | Hoyoverse";
+
+        return () => {
+            dispatch(resetFigures());
+        };
     }, [dispatch]);
-    const { series } = useSelector((state) => state.series);
+
     return (
         <div>
             <HomeBanner></HomeBanner>
@@ -21,7 +28,12 @@ const HomePage = () => {
                 series.map((seriesItem) => (
                     <div key={seriesItem?.id}>
                         <Heading>{seriesItem?.name}</Heading>
-                        <CardList></CardList>
+                        <CardList
+                            figures={figures.filter(
+                                (figure) =>
+                                    figure?.series?.id === seriesItem?.id
+                            )}
+                        ></CardList>
                     </div>
                 ))}
         </div>

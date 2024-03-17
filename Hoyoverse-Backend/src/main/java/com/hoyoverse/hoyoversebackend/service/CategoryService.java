@@ -4,6 +4,8 @@ import com.hoyoverse.hoyoversebackend.model.product.Category;
 import com.hoyoverse.hoyoversebackend.model.response.Response;
 import com.hoyoverse.hoyoversebackend.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,34 +15,34 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Response<List<Category>> getAllCategories() {
-        return new Response<>(Response.SUCCESS, "Get all categories successfully", categoryRepository.findAll());
+    public Page<Category> getAllCategories(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
     }
 
-    public Response<Category> saveCategory(Category category) {
-        return new Response<>(Response.SUCCESS, "Save category successfully", categoryRepository.save(category));
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
     }
 
-    public Response<Category> getCategoryById(Integer id) {
-        return new Response<>(Response.SUCCESS, "Get category successfully", categoryRepository.findById(id).orElse(null));
+    public Category getCategoryById(Integer id) {
+        return categoryRepository.findById(id).orElse(null);
     }
 
-    public Response<Category> deleteCategoryById(Integer id) {
+    public Category deleteCategoryById(Integer id) {
         Category category = categoryRepository.findById(id).orElse(null);
         if (category != null) {
             categoryRepository.deleteById(category.getId());
-            return new Response<>(Response.SUCCESS, "Delete category successfully", category);
+            return category;
         }
-        return new Response<>(Response.NOT_FOUND, "Category not found");
+        return null;
     }
 
-    public Response<Category> updateCategory(Integer id, Category category) {
+    public Category updateCategory(Integer id, Category category) {
         Category existingCategory = categoryRepository.findById(id).orElse(null);
         if (existingCategory != null) {
             existingCategory.setName(category.getName());
             existingCategory.setFigures(category.getFigures());
-            return new Response<>(Response.SUCCESS, "Update category successfully", categoryRepository.save(existingCategory));
+            return categoryRepository.save(existingCategory);
         }
-        return new Response<>(Response.NOT_FOUND, "Category not found");
+        return null;
     }
 }

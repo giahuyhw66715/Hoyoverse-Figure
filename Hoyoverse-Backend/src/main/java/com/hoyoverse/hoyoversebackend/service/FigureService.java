@@ -1,40 +1,47 @@
 package com.hoyoverse.hoyoversebackend.service;
 
 import com.hoyoverse.hoyoversebackend.model.product.Figure;
-import com.hoyoverse.hoyoversebackend.model.response.Response;
 import com.hoyoverse.hoyoversebackend.repository.FigureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FigureService {
     @Autowired
     private FigureRepository figureRepository;
 
-    public Response<List<Figure>> getAllFigures() {
-        return new Response<>(Response.SUCCESS, "Get all figures successfully", figureRepository.findAll());
+    public Page<Figure> getAllFigures(Pageable pageable) {
+        return figureRepository.findAll(pageable);
     }
 
-    public Response<Figure> saveFigure(Figure figure) {
-        return new Response<>(Response.SUCCESS, "Save figure successfully", figureRepository.save(figure));
+    public Page<Figure> getFiguresByCategory(Integer categoryId, Pageable pageable) {
+        return figureRepository.findByCategoryId(categoryId, pageable);
     }
 
-    public Response<Figure> getFigureById(Integer id) {
-        return new Response<>(Response.SUCCESS, "Get figure successfully", figureRepository.findById(id).orElse(null));
+    public Page<Figure> getFiguresBySeries(Integer seriesId, Pageable pageable) {
+        return figureRepository.findBySeriesId(seriesId, pageable);
     }
 
-    public Response<Figure> deleteFigureById(Integer id) {
+    public Figure saveFigure(Figure figure) {
+        return figureRepository.save(figure);
+    }
+
+    public Figure getFigureById(Integer id) {
+        return figureRepository.findById(id).orElse(null);
+    }
+
+    public Figure deleteFigureById(Integer id) {
         Figure figure = figureRepository.findById(id).orElse(null);
         if (figure != null) {
             figureRepository.deleteById(figure.getId());
-            return new Response<>(Response.SUCCESS, "Delete figure successfully", figure);
+            return figure;
         }
-        return new Response<>(Response.NOT_FOUND, "Figure not found");
+        return null;
     }
 
-    public Response<Figure> updateFigure(Integer id, Figure figure) {
+    public Figure updateFigure(Integer id, Figure figure) {
         Figure existingFigure = figureRepository.findById(id).orElse(null);
         if (existingFigure != null) {
             existingFigure.setTitle(figure.getTitle());
@@ -47,8 +54,8 @@ public class FigureService {
             existingFigure.setReleaseDate(figure.getReleaseDate());
             existingFigure.setTotalQuantity(figure.getTotalQuantity());
             existingFigure.setAvailableQuantity(figure.getAvailableQuantity());
-            return new Response<>(Response.SUCCESS, "Update figure successfully", figureRepository.save(existingFigure));
+            return figureRepository.save(existingFigure);
         }
-        return new Response<>(Response.NOT_FOUND, "Figure not found");
+        return null;
     }
 }

@@ -1,12 +1,14 @@
 package com.hoyoverse.hoyoversebackend.controller;
 
 import com.hoyoverse.hoyoversebackend.model.product.Category;
-import com.hoyoverse.hoyoversebackend.model.response.Response;
+import com.hoyoverse.hoyoversebackend.model.request.CustomPageRequest;
 import com.hoyoverse.hoyoversebackend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -16,27 +18,29 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping()
-    public Response<List<Category>> getAllCategories() {
-        return categoryService.getAllCategories();
+    public Page<Category> getAllCategories(@RequestParam Map<String, String> requestParams) {
+        CustomPageRequest customPageRequest = new CustomPageRequest(requestParams);
+        Pageable pageable = customPageRequest.handlePagination();
+        return categoryService.getAllCategories(pageable);
     }
 
     @GetMapping("/{id}")
-    public Response<Category> getCategoryById(@PathVariable("id") Integer id) {
+    public Category getCategoryById(@PathVariable("id") Integer id) {
         return categoryService.getCategoryById(id);
     }
 
     @PostMapping()
-    public Response<Category> saveCategory(@RequestBody Category category) {
+    public Category saveCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
     }
 
     @PutMapping("/{id}")
-    public Response<Category> updateProduct(@PathVariable("id") Integer id, @RequestBody Category category) {
+    public Category updateProduct(@PathVariable("id") Integer id, @RequestBody Category category) {
         return categoryService.updateCategory(id, category);
     }
 
     @DeleteMapping("/{id}")
-    public Response<Category> deleteCategoryById(@PathVariable("id") Integer id) {
+    public Category deleteCategoryById(@PathVariable("id") Integer id) {
         return categoryService.deleteCategoryById(id);
     }
 }
