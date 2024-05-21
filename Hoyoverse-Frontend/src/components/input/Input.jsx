@@ -1,17 +1,36 @@
 import PropTypes from "prop-types";
-import { useController } from "react-hook-form";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-
+import EyeSlashIcon from "../icon/EyeSlashIcon";
+import EyeIcon from "../icon/EyeIcon";
+import { useController } from "react-hook-form";
 const Input = ({
-    control,
-    errors = {},
-    className = "",
-    placeholder = "Search",
-    icon,
-    name = "",
+    labelIcon,
+    toggle = false,
     type = "text",
+    placeholder = "",
+    className = "",
+    name,
+    control,
+    errors,
     ...props
 }) => {
+    let inputPadding = "";
+    if (labelIcon && toggle) {
+        inputPadding += "py-5 pl-20 pr-16";
+    } else if (labelIcon) {
+        inputPadding += "p-5 pl-20";
+    } else if (toggle) {
+        inputPadding += "p-5 pr-16";
+    } else {
+        inputPadding += "p-5";
+    }
+
+    const [isShow, setIsShow] = useState(false);
+    const handleToggle = () => {
+        setIsShow(!isShow);
+    };
+
     const { field } = useController({
         control,
         name,
@@ -19,28 +38,45 @@ const Input = ({
     });
 
     return (
-        <div className="relative">
-            <input
-                type={type}
-                className={twMerge(
-                    `w-full text-black px-4 py-3 border border-gray-300 rounded-lg ${className}`
+        <div>
+            <div className="relative">
+                {labelIcon && (
+                    <label
+                        htmlFor="email"
+                        className="absolute left-0 p-5 bg-slate-100 rounded-s-xl top-2/4 -translate-y-2/4"
+                    >
+                        {labelIcon}
+                    </label>
                 )}
-                placeholder={placeholder}
-                name={name}
-                id={name}
-                onChange={(e) => {
-                    console.log(e);
-                }}
-                {...props}
-                {...field}
-            />
-            {errors[name] && (
-                <p className="pl-2 mt-2 text-red-500">{errors[name].message}</p>
-            )}
-            {icon && (
-                <div className="absolute right-0 flex items-center justify-center h-full px-3 text-white rounded cursor-pointer top-2/4 -translate-y-2/4 bg-primary">
-                    {icon}
-                </div>
+                <input
+                    placeholder={placeholder}
+                    type={
+                        type === "password"
+                            ? isShow
+                                ? "text"
+                                : "password"
+                            : type
+                    }
+                    className={twMerge(
+                        `w-full ${inputPadding} border rounded-xl ${className}`
+                    )}
+                    id={name}
+                    name={name}
+                    {...props}
+                    {...field}
+                />
+
+                {toggle && (
+                    <span
+                        className="absolute right-0 p-5 cursor-pointer select-none top-2/4 -translate-y-2/4"
+                        onClick={handleToggle}
+                    >
+                        {!isShow ? <EyeIcon /> : <EyeSlashIcon />}
+                    </span>
+                )}
+            </div>
+            {errors && (
+                <p className="mt-4 text-red-500">{errors[name]?.message}</p>
             )}
         </div>
     );
@@ -48,11 +84,12 @@ const Input = ({
 
 Input.propTypes = {
     className: PropTypes.string,
-    control: PropTypes.any.isRequired,
-    errors: PropTypes.object,
-    icon: PropTypes.any,
+    control: PropTypes.any,
+    errors: PropTypes.any,
+    labelIcon: PropTypes.any,
     name: PropTypes.string,
     placeholder: PropTypes.string,
+    toggle: PropTypes.bool,
     type: PropTypes.string,
 };
 

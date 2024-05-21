@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { twMerge } from "tailwind-merge";
 
-const Label = ({ htmlFor = "", className = "", children }) => {
+const Label = ({ htmlFor, className = "", children }) => {
     return (
         <label
             htmlFor={htmlFor}
             className={twMerge(
-                `text-xl font-semibold text-grey cursor-pointer ${className}`
+                `font-semibold select-none w-full cursor-pointer ${className}`
             )}
         >
             {children}

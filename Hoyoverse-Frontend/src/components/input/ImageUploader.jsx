@@ -11,7 +11,7 @@ const ImageUploader = ({ name, setValue, ...props }) => {
     return (
         <label
             htmlFor={name}
-            className="flex items-center justify-center w-full h-full px-4 border border-gray-300 rounded-lg cursor-pointer"
+            className="flex items-center justify-center w-full h-full px-4 border border-gray-300 rounded-lg cursor-pointer p-5"
         >
             {isUpload ? (
                 <span className="flex items-center gap-3">

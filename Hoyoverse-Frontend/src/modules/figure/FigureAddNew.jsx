@@ -1,47 +1,41 @@
-import { getAllSeries } from "../../store/series/seriesSlice";
-import { addFigure } from "../../store/figure/figureSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
+import { getCategoryList } from "../../redux/category/categorySlice";
+import { getSeriesList } from "../../redux/series/seriesSlice";
+import { getManufacturerList } from "../../redux/manufacturer/manufacturerSlice";
+import Heading from "../../components/heading/Heading";
+import FormLayout from "../../layout/FormLayout";
+import Field from "../../components/field/Field";
+import Label from "../../components/label/Label";
+import Input from "../../components/input/Input";
+import ImageUploader from "../../components/input/ImageUploader";
 import Button from "../../components/button/Button";
 import Dropdown from "../../components/dropdown/Dropdown";
-import DropdownList from "../../components/dropdown/DropdownList";
-import DropdownOption from "../../components/dropdown/DropdownOption";
-import DropdownSelect from "../../components/dropdown/DropdownSelect";
-import Field from "../../components/field/Field";
-import FormLayout from "../../layout/FormLayout";
-import Heading from "../../components/common/Heading";
-import Input from "../../components/input/Input";
-import Label from "../../components/label/Label";
-import { getAllCategories } from "../../store/category/categorySlice";
-import { getAllBrands } from "../../store/brand/brandSlice";
-import ImageUploader from "../../components/input/ImageUploader";
+import { addFigure } from "../../redux/figure/figureSlice";
 
 const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
-    characterName: yup.string().required("Character name is required"),
-    releaseDate: yup.string().required("Release date is required"),
+    character_name: yup.string().required("Character name is required"),
+    release_date: yup.string().required("Release date is required"),
     price: yup
         .number()
         .typeError("Price must be a number")
         .required("Number is required"),
-    height: yup
-        .string()
-        .typeError("Height must be a number")
-        .required("Height is required"),
-    totalQuantity: yup
+    size: yup.string().required("Size is required"),
+    total_quantity: yup
         .number()
         .typeError("Total quantity must be a number")
         .required("Total quantity is required"),
-    availableQuantity: yup
+    available_quantity: yup
         .number()
         .typeError("Available quantity must be a number")
         .required("Available quantity is required"),
     category: yup.object().required("Please select category"),
     series: yup.object().required("Please select series"),
-    brand: yup.object().required("Please select brand"),
+    manufacturer: yup.object().required("Please select manufacturer"),
 });
 
 const FigureAddNew = () => {
@@ -52,37 +46,57 @@ const FigureAddNew = () => {
         handleSubmit,
         formState: { errors },
         reset,
-        watch,
         setValue,
     } = useForm({
-        resolver: yupResolver(schema),
+        // resolver: yupResolver(schema),
         defaultValues: {
             title: "",
-            characterName: "",
-            releaseDate: "",
+            character_name: "",
+            release_date: "",
             price: 0,
-            discount: 0,
-            height: 0,
-            totalQuantity: 0,
-            availableQuantity: 0,
+            size: "",
+            total_quantity: 0,
+            available_quantity: 0,
+            category: "",
+            series: "",
+            manufacturer: "",
         },
     });
 
+    const [categoryTitle, setCategoryTitle] = useState("Category");
+    const [seriesTitle, setSeriesTitle] = useState("Series");
+    const [manufacturerTitle, setManufacturerTitle] = useState("Manufacturer");
+
     const handleAddNewFigure = async (values) => {
-        const request = { ...values };
-        dispatch(addFigure(request));
+        dispatch(addFigure(values));
+        setCategoryTitle("Category");
+        setSeriesTitle("Series");
+        setManufacturerTitle("Manufacturer");
         reset({});
     };
 
     useEffect(() => {
-        dispatch(getAllCategories());
-        dispatch(getAllSeries());
-        dispatch(getAllBrands());
+        dispatch(getCategoryList());
+        dispatch(getSeriesList());
+        dispatch(getManufacturerList());
     }, [dispatch]);
 
-    const { categories } = useSelector((state) => state.category);
-    const { series } = useSelector((state) => state.series);
-    const { brands } = useSelector((state) => state.brand);
+    const { categoryList } = useSelector((state) => state.category);
+    const { seriesList } = useSelector((state) => state.series);
+    const { manufacturerList } = useSelector((state) => state.manufacturer);
+
+    const categoryOptions = categoryList?.map((category) => ({
+        id: category.id,
+        name: category.name,
+    }));
+    const seriesOptions = seriesList?.map((series) => ({
+        id: series.id,
+        name: series.name,
+    }));
+    const manufacturerOptions = manufacturerList?.map((manufacturer) => ({
+        id: manufacturer.id,
+        name: manufacturer.name,
+    }));
 
     return (
         <div>
@@ -92,6 +106,7 @@ const FigureAddNew = () => {
             <p className="text-sm text-grayDark">Add new figure</p>
             <form
                 autoComplete="off"
+                spellCheck="false"
                 onSubmit={handleSubmit(handleAddNewFigure)}
             >
                 <FormLayout>
@@ -110,7 +125,7 @@ const FigureAddNew = () => {
                             control={control}
                             errors={errors}
                             placeholder="Character name"
-                            name="characterName"
+                            name="character_name"
                         ></Input>
                     </Field>
                     <Field>
@@ -119,7 +134,7 @@ const FigureAddNew = () => {
                             control={control}
                             errors={errors}
                             placeholder="Release date"
-                            name="releaseDate"
+                            name="release_date"
                         ></Input>
                     </Field>
                     <Field>
@@ -133,23 +148,12 @@ const FigureAddNew = () => {
                         ></Input>
                     </Field>
                     <Field>
-                        <Label htmlFor="discount">Discount (%)</Label>
+                        <Label htmlFor="size">Size</Label>
                         <Input
                             control={control}
                             errors={errors}
-                            placeholder="Discount"
-                            name="discount"
-                            type="number"
-                        ></Input>
-                    </Field>
-                    <Field>
-                        <Label htmlFor="height">Height (cm)</Label>
-                        <Input
-                            control={control}
-                            errors={errors}
-                            placeholder="Height"
-                            name="height"
-                            type="number"
+                            placeholder="Size"
+                            name="size"
                         ></Input>
                     </Field>
                     <Field>
@@ -158,7 +162,7 @@ const FigureAddNew = () => {
                             control={control}
                             errors={errors}
                             placeholder="Total quantity"
-                            name="totalQuantity"
+                            name="total_quantity"
                             type="number"
                         ></Input>
                     </Field>
@@ -170,87 +174,42 @@ const FigureAddNew = () => {
                             control={control}
                             errors={errors}
                             placeholder="Available quantity"
-                            name="availableQuantity"
+                            name="available_quantity"
                             type="number"
                         ></Input>
                     </Field>
                     <Field>
-                        <Label htmlFor="category">Category</Label>
-                        <Dropdown errors={errors} name="category">
-                            <DropdownSelect
-                                dark
-                                name="category"
-                                defaultValue="Select category"
-                                className="justify-between"
-                                watch={watch}
-                                border
-                            ></DropdownSelect>
-                            <DropdownList>
-                                {categories?.length > 0 &&
-                                    categories.map((category) => (
-                                        <DropdownOption
-                                            key={category.id}
-                                            name="category"
-                                            option={category}
-                                            setValue={setValue}
-                                        >
-                                            {`${category?.id} - ${category?.name}`}
-                                        </DropdownOption>
-                                    ))}
-                            </DropdownList>
-                        </Dropdown>
+                        <Label htmlFor="availableQuantity">Category</Label>
+                        <Dropdown
+                            title={categoryTitle}
+                            setTitle={setCategoryTitle}
+                            name="category"
+                            className="bg-transparent text-black border w-full p-5 rounded-xl"
+                            options={categoryOptions}
+                            setValue={setValue}
+                        ></Dropdown>
                     </Field>
                     <Field>
                         <Label htmlFor="series">Series</Label>
-                        <Dropdown errors={errors} name="series">
-                            <DropdownSelect
-                                dark
-                                name="series"
-                                defaultValue="Select series"
-                                className="justify-between"
-                                watch={watch}
-                                border
-                            ></DropdownSelect>
-                            <DropdownList>
-                                {series?.length > 0 &&
-                                    series.map((seriesItem) => (
-                                        <DropdownOption
-                                            key={seriesItem.id}
-                                            name="series"
-                                            option={seriesItem}
-                                            setValue={setValue}
-                                        >
-                                            {`${seriesItem?.id} - ${seriesItem?.name}`}
-                                        </DropdownOption>
-                                    ))}
-                            </DropdownList>
-                        </Dropdown>
+                        <Dropdown
+                            title={seriesTitle}
+                            setTitle={setSeriesTitle}
+                            name="series"
+                            className="bg-transparent text-black border w-full p-5 rounded-xl"
+                            options={seriesOptions}
+                            setValue={setValue}
+                        ></Dropdown>
                     </Field>
                     <Field>
-                        <Label htmlFor="brand">Brand</Label>
-                        <Dropdown errors={errors} name="brand">
-                            <DropdownSelect
-                                dark
-                                name="brand"
-                                defaultValue="Select brand"
-                                className="justify-between"
-                                watch={watch}
-                                border
-                            ></DropdownSelect>
-                            <DropdownList>
-                                {brands?.length > 0 &&
-                                    brands.map((brand) => (
-                                        <DropdownOption
-                                            key={brand.id}
-                                            name="brand"
-                                            option={brand}
-                                            setValue={setValue}
-                                        >
-                                            {`${brand?.id} - ${brand?.name}`}
-                                        </DropdownOption>
-                                    ))}
-                            </DropdownList>
-                        </Dropdown>
+                        <Label htmlFor="manufacturer">Manufacturer</Label>
+                        <Dropdown
+                            title={manufacturerTitle}
+                            setTitle={setManufacturerTitle}
+                            name="manufacturer"
+                            className="bg-transparent text-black border w-full p-5 rounded-xl"
+                            options={manufacturerOptions}
+                            setValue={setValue}
+                        ></Dropdown>
                     </Field>
                     <Field>
                         <Label htmlFor="images">Images</Label>
@@ -262,7 +221,9 @@ const FigureAddNew = () => {
                     </Field>
                 </FormLayout>
                 <div className="mt-5 text-center">
-                    <Button type="submit">Add New Figure</Button>
+                    <Button type="submit" color="secondary">
+                        Add New Figure
+                    </Button>
                 </div>
             </form>
         </div>

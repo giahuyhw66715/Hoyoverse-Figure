@@ -7,18 +7,20 @@ const Button = ({
     children,
     className = "",
     type = "button",
-    color = "primary",
+    color,
     onClick = () => {},
 }) => {
     const buttonClassName = twMerge(
-        `font-semibold p-5 border text-white rounded-xl capitalize hover:bg-transparent ${
+        `font-semibold py-4 px-6 border text-white rounded-xl capitalize ${
             color === "primary"
-                ? " bg-primary border-primary hover:text-primary"
+                ? " hover:bg-transparent bg-primary border-primary hover:text-primary"
                 : color === "secondary"
-                ? " bg-secondary border-secondary hover:text-secondary"
+                ? " hover:bg-transparent bg-secondary border-secondary hover:text-secondary"
                 : color === "violet"
-                ? " hover:border-violet-500 hover:text-violet-500 bg-violet-500"
-                : "bg-black border-black hover:text-black"
+                ? " hover:bg-transparent hover:border-violet-500 hover:text-violet-500 bg-violet-500"
+                : color === "black"
+                ? " hover:bg-transparent hover:border-black hover:text-black bg-black"
+                : ""
         }  transition-all ${className}`
     );
 

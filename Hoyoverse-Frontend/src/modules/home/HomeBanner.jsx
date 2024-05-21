@@ -1,20 +1,17 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import Button from "../../components/button/Button";
-import Heading from "../../components/common/Heading";
+import Heading from "../../components/heading/Heading";
 
 const slides = [
     {
         title: "Genshin Impact",
-        image: "/genshin-impact-banner.jpeg",
+        image: "bg-home-genshin",
         description: "Step Into a Vast Magical World of Adventure",
-        to: "/figures/genshin-impact",
     },
     {
         title: "Honkai Star Rail",
-        image: "/honkai-star-rail-banner.jpg",
-        description: "Welcome to Astral Express",
-        to: "/figures/honkai-star-rail",
+        image: "bg-home-hsr",
+        description: 'Welcome to Version 2.0 "If One Dreams At Midnight"!',
     },
 ];
 
@@ -31,29 +28,24 @@ const HomeBanner = () => {
     // }, [currentIndex]);
 
     return (
-        <div className="w-full h-[1000px] relative group -mt-48">
+        <div className="w-full h-[1000px] relative group -mt-24">
             <div
-                style={{
-                    backgroundImage: `url(${slides[currentIndex].image})`,
-                }}
-                className="w-full h-full duration-500 bg-center bg-no-repeat bg-cover"
+                className={`w-full h-full duration-500 bg-center bg-no-repeat bg-cover ${slides[currentIndex].image}`}
             >
                 <div className="flex flex-col justify-center px-16 overlay">
-                    {/* <h1 className="text-6xl font-bold">
-                        {slides[currentIndex].title}
-                    </h1> */}
-                    <Heading className="mb-0 text-6xl text-left text-white">
+                    <Heading className="mb-0 text-4xl text-left text-white">
                         {slides[currentIndex].title}
                     </Heading>
-                    <p className="my-8 text-xl font-medium w-full max-w-[800px]">
+                    <p className="mt-8 mb-12 text-6xl font-medium w-full max-w-[800px] leading-normal">
                         {slides[currentIndex].description}
                     </p>
-                    <Button
-                        className="px-8 py-4 text-xl rounded-full w-fit"
+                    {/* <Button
                         color="secondary"
+                        className="px-8 py-6 text-xl rounded-full w-fit"
+                        url={slides[currentIndex].to}
                     >
                         Discover Now
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
             <div

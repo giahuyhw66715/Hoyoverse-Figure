@@ -1,11 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+    #root {
+        height: 100%;
+    }
     body {
-        @apply text-base font-normal font-primary;
+        font-family: "Rubik", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        color: black;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
@@ -22,9 +29,6 @@
     input {
         @apply outline-none;
     }
-    #root {
-        height: 100%;
-    }
 }
 
 @layer components {
@@ -38,16 +42,98 @@
     .container {
         @apply w-full max-w-[1440px] mx-auto;
     }
-
-    .display-content {
-        @apply pt-48 pb-24;
-    }
 }
 
-.dropdown-list {
-    scrollbar-width: none;
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-.dropdown-list::-webkit-scrollbar {
+.ReactModal__Content {
+    min-width: 550px;
+    border-radius: 12px !important;
+    max-width: 920px;
+}
+
+.range-slider {
+    position: relative;
+    width: 100%;
+    height: 5px;
+    margin: 60px 0;
+    background-color: #8a8a8a;
+}
+
+.slider-track {
+    height: 100%;
+    position: absolute;
+    background-color: #fe696a;
+}
+
+.range-slider input {
+    position: absolute;
+    width: 100%;
+    background: none;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+    appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #fff;
+    pointer-events: auto;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: 0 0.125rem 0.5625rem -0.125rem rgba(0, 0, 0, 0.25);
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #fff;
+    pointer-events: auto;
+    -moz-appearance: none;
+    cursor: pointer;
+    box-shadow: 0 0.125rem 0.5625rem -0.125rem rgba(0, 0, 0, 0.25);
+}
+
+.tooltip {
+    padding: 0.25rem 0.5rem;
+    border: 0;
+    background-color: #373f50;
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    border-radius: 0.25rem;
+    bottom: 120%;
+    display: block;
+    position: absolute;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.min-tooltip {
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    z-index: 5;
+}
+
+.max-tooltip {
+    right: 50%;
+    transform: translateX(50%) translateY(-100%);
+    z-index: 5;
+}
+
+.no-scrollbar::-webkit-scrollbar {
     display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }

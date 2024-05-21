@@ -1,14 +1,14 @@
-import Heading from "../../components/common/Heading";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import FormLayout from "../../layout/FormLayout";
-import Field from "../../components/field/Field";
-import Label from "../../components/label/Label";
-import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import Field from "../../components/field/Field";
+import FormLayout from "../../layout/FormLayout";
+import Input from "../../components/input/Input";
+import Label from "../../components/label/Label";
 import { useDispatch } from "react-redux";
-import { addSeries } from "../../store/series/seriesSlice";
+import Heading from "../../components/heading/Heading";
+import { addSeries } from "../../redux/series/seriesSlice";
 
 const schema = yup.object().shape({
     name: yup.string().required("Series name is required"),
@@ -29,17 +29,15 @@ const SeriesAddNew = () => {
     });
 
     const handleAddNewSeries = async (values) => {
-        const request = { ...values };
-        dispatch(addSeries(request));
+        dispatch(addSeries(values));
         reset({});
     };
 
     return (
         <div>
-            <Heading className="mt-0 mb-3 text-left text-black">
+            <Heading className="mt-0 mb-3 text-left text-secondary">
                 New Series
             </Heading>
-            <p className="text-sm text-grayDark">Add new series</p>
             <form
                 autoComplete="off"
                 onSubmit={handleSubmit(handleAddNewSeries)}
@@ -56,7 +54,9 @@ const SeriesAddNew = () => {
                     </Field>
                 </FormLayout>
                 <div className="mt-5 text-center">
-                    <Button type="submit">Add New Series</Button>
+                    <Button type="submit" color="secondary">
+                        Add New Series
+                    </Button>
                 </div>
             </form>
         </div>

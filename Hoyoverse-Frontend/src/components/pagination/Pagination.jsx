@@ -1,9 +1,26 @@
 import PropTypes from "prop-types";
 import Button from "../button/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getFigureList } from "../../redux/figure/figureSlice";
 
-const Pagination = ({ handleGetData = () => {}, totalPages }) => {
-    const { page } = useSelector((state) => state.figure);
+const Pagination = () => {
+    const { currentPage, totalPages, pageLimit, request } = useSelector(
+        (state) => state.figure
+    );
+    const dispatch = useDispatch();
+
+    const handlePagination = (index) => {
+        if (currentPage < totalPages) {
+            window.scrollTo(0, 0);
+            dispatch(
+                getFigureList({
+                    ...request,
+                    page: index,
+                    limit: pageLimit,
+                })
+            );
+        }
+    };
 
     return (
         <div className="flex items-center justify-center mt-10 gap-x-5">
@@ -14,8 +31,8 @@ const Pagination = ({ handleGetData = () => {}, totalPages }) => {
                         <Button
                             key={i}
                             className="px-4 py-2 rounded-md"
-                            onClick={() => handleGetData(i)}
-                            color={i === page ? "primary" : "black"}
+                            onClick={() => handlePagination(i)}
+                            color={i === currentPage ? "primary" : "black"}
                         >
                             {i + 1}
                         </Button>
@@ -26,8 +43,7 @@ const Pagination = ({ handleGetData = () => {}, totalPages }) => {
 };
 
 Pagination.propTypes = {
-    handleGetData: PropTypes.func,
-    totalPages: PropTypes.number,
+    request: PropTypes.object,
 };
 
 export default Pagination;

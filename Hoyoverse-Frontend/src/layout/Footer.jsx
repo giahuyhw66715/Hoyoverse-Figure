@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { logoUrl } from "../utils/constants";
 
 const Footer = () => {
     return (
@@ -19,7 +20,7 @@ const Footer = () => {
             </div>
             <div className="w-[320px] h-14 mb-2 flex-shrink-0">
                 <img
-                    src="/hoyoverse-logo.png"
+                    src={logoUrl}
                     alt="Logo"
                     className="object-cover w-full h-full"
                 />
