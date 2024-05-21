@@ -58,7 +58,6 @@ const AllFigure = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log("Running");
         dispatch(getFigureList(request));
         dispatch(getManufacturerList());
     }, [dispatch, request]);
