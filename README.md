@@ -1,4 +1,4 @@
-# Spring Commerce
+# Hoyoverse Figure
 
 An E-commerce website for selling anime figure products.
 
