@@ -10,7 +10,6 @@ import FigureDetailPage from "./pages/FigureDetailPage";
 import Modal from "react-modal";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import ScrollToTop from "./hooks/useScrollToTop";
 import CartPage from "./pages/CartPage";
 import { useDispatch, useSelector } from "react-redux";
 import { authRefreshToken, authUpdateUser } from "./redux/auth/authSlice";
@@ -37,10 +36,11 @@ import UserUpdate from "./modules/user/UserUpdate";
 import UserProfile from "./modules/user/UserProfile";
 import AboutPage from "./pages/AboutPage";
 import OrderDetails from "./modules/order/OrderDetails";
+import useScrollToTop from "./hooks/useScrollToTop";
 Modal.setAppElement("#root");
 
 const App = () => {
-    ScrollToTop();
+    useScrollToTop();
 
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();

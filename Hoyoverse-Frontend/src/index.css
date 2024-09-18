@@ -40,7 +40,7 @@
     }
 
     .container {
-        @apply w-full max-w-[1440px] mx-auto;
+        @apply w-full max-w-[1280px] mx-auto;
     }
 }
 
